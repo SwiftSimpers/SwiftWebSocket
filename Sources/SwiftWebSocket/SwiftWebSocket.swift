@@ -15,24 +15,6 @@ public enum ReadyState: Int {
 // let's keep this lmao
 // YEP
 
-/* API Usage
- var socket = WebSocketStream("wss://gateway.discord.gg/?v=9&encoding=json")
-
- socket.closed { code, reason in
-   ...
- }
-
- socket.error { error in
-   ...
- }
-
- try! await socket.ready()
-
- for await msg in socket {
-   ...
- }
- */
-
 private class SessionDelegate: NSObject, URLSessionWebSocketDelegate {
     private let didOpen: (String?) -> Void
     private let didClose: (Int, Data?) -> Void
@@ -221,15 +203,12 @@ public class WebSocketStream: AsyncSequence {
         wsTask?.receive { [weak self] result in
             guard let self = self else { return }
 
-            switch result { // fak can't find a good swift ws server library
+            switch result {
             case let .failure(error):
                 for handler in self.errorHandlers {
                     handler(error)
                 }
             case let .success(msg):
-                // oh fuck
-                // should we use a message queue then hmm
-                // or handleMessage() after some async iter is made
                 switch msg {
                 case let .data(data):
                     if self.messageHandlers.count == 0 {
