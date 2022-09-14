@@ -139,7 +139,7 @@ public class WebSocketStream: AsyncSequence {
         }
     }
 
-    init(url: URL, protocols: [String] = [], headers: [String: String] = [:]) {
+    public init(url: URL, protocols: [String] = [], headers: [String: String] = [:]) {
         self.url = url
         let session = URLSession(
             configuration: URLSessionConfiguration.default,
