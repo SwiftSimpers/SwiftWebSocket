@@ -11,10 +11,6 @@ public enum ReadyState: Int {
     case closed = 3
 }
 
-// sora gay
-// let's keep this lmao
-// YEP
-
 private class SessionDelegate: NSObject, URLSessionWebSocketDelegate {
     private let didOpen: (String?) -> Void
     private let didClose: (Int, Data?) -> Void
