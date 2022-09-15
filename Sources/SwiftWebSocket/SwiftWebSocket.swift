@@ -54,7 +54,9 @@ public class WebSocketStream: AsyncSequence {
         private var messageCache: [WSMessage] = []
         var nextHandler: ((WSMessage) -> Void)? {
             get {
-                self._nextHandler
+                let handler = self._nextHandler
+                self._nextHandler = nil
+                return handler
             }
             set(newHandler) {
                 self._nextHandler = newHandler
