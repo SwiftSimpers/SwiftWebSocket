@@ -230,15 +230,15 @@ public class WebSocketStream: AsyncSequence {
         }
     }
 
-    func closed(_ handler: @escaping ClosedHandler) {
+    public func closed(_ handler: @escaping ClosedHandler) {
         closedHandlers.append(handler)
     }
 
-    func error(_ handler: @escaping ErrorHandler) {
+    public func error(_ handler: @escaping ErrorHandler) {
         errorHandlers.append(handler)
     }
 
-    func message(_ handler: @escaping (WSMessage) -> Void) {
+    public func message(_ handler: @escaping (WSMessage) -> Void) {
         if messageHandlers.count == 0 {
             for msg in messageCache {
                 handler(msg)
